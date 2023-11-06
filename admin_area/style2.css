@@ -1,0 +1,60 @@
+.in_pet_ca{
+    background-image: linear-gradient(45deg, #F7CE47 0%, #F09819  51%, #e38f04  100%);
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    flex-shrink: 0;
+    font-family: 'Orbitron';
+    font-size: 16px;
+    font-weight: 500;
+    height: 4rem;
+    padding: 0 1.6rem;
+    text-align: center;
+    text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+    transition: all .5s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin-top:30px;
+  }
+  
+  .in_pet_ca:hover {
+    box-shadow: rgba(227, 143, 4, 0.5) 0 1px 30px;
+    transition-duration: .1s;
+  }
+
+  .admin_image{
+    width:100px;
+    object-fit: contain;
+    margin-left:20px;
+    margin-top:20px;
+  }
+  .ad_button{
+    margin: 10px;
+  padding: 15px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: inline-block;
+  border: 0px;
+  font-weight: 700;
+  box-shadow: 0px 0px 14px -7px #f09819;
+  background-image: linear-gradient(45deg, #F7CE47 0%, #F09819  51%, #FF512F  100%);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  }
+  .ad_button:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+  }
+
+  
