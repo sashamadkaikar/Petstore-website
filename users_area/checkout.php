@@ -1,7 +1,7 @@
 <!-- connect file  -->
 <?php
- include('includes/connect.php');
- include('functions/common_function.php');
+ include('../includes/connect.php');
+ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +22,12 @@
    
     <!--css file-->
     <link rel="stylesheet" href="style.css">
-
+<style>
+  .logo{
+    width:15%;
+    height:7%;
+}
+</style>
 
 </head>
 <body>
@@ -30,20 +35,20 @@
     <!--first child-->
 <nav class="navbar navbar-expand-lg " style="background-color: #FFD449;">
   <div class="container-fluid">
-    <img src="./images/logo.png" class="logo">
+    <img src="../images/logo.png" class="logo">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-underline">
         <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="index.php">HOME</a>
+          <a class="nav-link " aria-current="page" href="../index.php">HOME</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="display_all.php">Products</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Register</a>
+          <a class="nav-link" href="user_registration.php">Register</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">About</a>
@@ -56,6 +61,37 @@
   </div>
 </nav>
   </div>
+ <!-- second child-->
+ <nav class="navbar navbar-expand-lg" style="background-color: #F9A620;">
+ <ul class="navbar-nav me-auto">
+ 
+<?php
+if(!isset($_SESSION['username'])){
+  echo "<li class='nav-item'>
+  <a class='nav-link ' href='#'>WELCOME GUEST!</a>
+</li>";
+}
+else{
+  echo "<li class='nav-item'>
+  <a class='nav-link ' href='#'>WELCOME".$_SESSION['username']."</a>
+</li>";
+}
+if(!isset($_SESSION['username'])){
+  echo "<li class='nav-item'>
+          <a class='nav-link' href='user_login.php'>LOGIN</a>
+        </li>";
+}
+else{
+  echo "<li class='nav-item'>
+  <a class='nav-link' href='logout.php'>LOGOUT</a>
+</li>";
+}
+?>
+ </ul>
+ </nav>
+
+
+
 
   <!-- fourth child  -->
   <div class="row px-1">
@@ -63,7 +99,7 @@
         <div class="row">
             <?php
            if(!isset($_SESSION['username'])){
-            include('users_area/user_login.php');
+            include('user_login.php');
            }
            else{
             include('payment.php');
@@ -76,7 +112,7 @@
   <!--LAST CHILD (footer)-->
   <!-- include footer  -->
   <?php
- include('includes/footer.php');
+ include('../includes/footer.php');
 
 ?>
 <!--BOOTSTRAP JS LINK -->

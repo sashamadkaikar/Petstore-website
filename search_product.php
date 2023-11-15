@@ -2,6 +2,7 @@
 <?php
  include('includes/connect.php');
  include('functions/common_function.php');
+ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +44,7 @@
           <a class="nav-link" href="#">Products</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Register</a>
+          <a class="nav-link" href="./users_area/user_registration.php">Register</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">About</a>
@@ -74,37 +75,32 @@
  <!-- second child-->
  <nav class="navbar navbar-expand-lg" style="background-color: #F9A620;">
  <ul class="navbar-nav me-auto">
- <li class="nav-item">
-          <a class="nav-link " href="#">WELCOME GUEST!</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">LOGIN</a>
-        </li>
+
+        <?php
+        if(!isset($_SESSION['username'])){
+          echo "<li class='nav-item'>
+          <a class='nav-link ' href='#'>WELCOME GUEST!</a>
+        </li>";
+        }
+        else{
+          echo "<li class='nav-item'>
+          <a class='nav-link ' href='#'>WELCOME".$_SESSION['username']."</a>
+        </li>";
+        }
+if(!isset($_SESSION['username'])){
+  echo "<li class='nav-item'>
+          <a class='nav-link' href='./users_area/user_login.php'>LOGIN</a>
+        </li>";
+}
+else{
+  echo "<li class='nav-item'>
+  <a class='nav-link' href='./users_area/logout.php'>LOGOUT</a>
+</li>";
+}
+?>
+
  </ul>
  </nav>
- <!--ad carousel-->
- <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src=".\images\dogp1.jpg" class="d-block w-100" alt="..." data-bs-interval="1000">
-    </div>
-    <div class="carousel-item">
-      <img src=".\images\cute.jpg" class="d-block w-100" alt="..." data-bs-interval="1000">
-    </div>
-    <div class="carousel-item">
-      <img src=".\images\pup.jpg" class="d-block w-100" alt="..." data-bs-interval="1000">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-
  <!--fourth-child-->
 <div class="row mt-3 ml-2">
   <div class="col-md-10">

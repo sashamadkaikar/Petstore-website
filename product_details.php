@@ -2,6 +2,7 @@
 <?php
  include('includes/connect.php');
  include('functions/common_function.php');
+ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +44,7 @@
           <a class="nav-link" href="display_all.php">Products</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Register</a>
+          <a class="nav-link" href="./users_area/user_registration.php">Register</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">About</a>
@@ -52,7 +53,7 @@
           <a class="nav-link" href="#">Contact</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-regular fa-basket-shopping " style="color: #104711;"></i><sup><b><?php  cart_item();?></b></sup></a>
+          <a class="nav-link" href="cart.php"><i class="fas fa-regular fa-basket-shopping " style="color: #104711;"></i><sup><b><?php  cart_item();?></b></sup></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">TOTAL:<?php total_cart_price();?>/-</a>
@@ -73,12 +74,29 @@
  <!-- second child-->
  <nav class="navbar navbar-expand-lg" style="background-color: #F9A620;">
  <ul class="navbar-nav me-auto">
- <li class="nav-item">
-          <a class="nav-link " href="#">WELCOME GUEST!</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">LOGIN</a>
-        </li>
+        <?php
+        if(!isset($_SESSION['username'])){
+          echo "<li class='nav-item'>
+          <a class='nav-link ' href='#'>WELCOME GUEST!</a>
+        </li>";
+        }
+        else{
+          echo "<li class='nav-item'>
+          <a class='nav-link ' href='#'>WELCOME".$_SESSION['username']."</a>
+        </li>";
+        }
+if(!isset($_SESSION['username'])){
+  echo "<li class='nav-item'>
+          <a class='nav-link' href='./users_area/user_login.php'>LOGIN</a>
+        </li>";
+}
+else{
+  echo "<li class='nav-item'>
+  <a class='nav-link' href='./users_area/logout.php'>LOGOUT</a>
+</li>";
+}
+?>
+
  </ul>
  </nav>
  <!--fourth-child-->

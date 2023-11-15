@@ -1,5 +1,5 @@
 <?php
-include('./includes/connect.php');
+//include('./includes/connect.php');
 function getproduct(){
     global $con;
     //condition to check isset
@@ -356,7 +356,12 @@ function cart(){
       echo "<script>window.open('index.php','_self')</script>";
     }
     else{
-      $insert_query="insert into `cart_details` (product_id,ip_address,quantity) values ($get_product_id,'$get_ip_add',1)";
+      //fetching the price of the product from product table
+      $select_prod_query = "SELECT * FROM `product` WHERE prod_id = $get_product_id";
+      $result_product = mysqli_query($con, $select_prod_query);
+      $product_info = mysqli_fetch_assoc($result_product);
+      $product_price = $product_info['prod_price'];
+      $insert_query="insert into `cart_details` (product_id,ip_address,quantity,total_quan_price) values ($get_product_id,'$get_ip_add',1,$product_price)";
       $result_query=mysqli_query($con,$insert_query);
       echo "<script>alert('Item added to cart')</script>";
       echo "<script>window.open('index.php','_self')</script>";
@@ -392,15 +397,38 @@ function cart_item(){
     $cart_query="select * from `cart_details` where ip_address='$get_ip_add'";
     $result_query=mysqli_query($con,$cart_query);
     while($row=mysqli_fetch_array($result_query)){
-        $product_id=$row['product_id'];
-        $select_products="select * from `product` where prod_id='$product_id'";
-        $result_products=mysqli_query($con,$select_products);
-        while($row_product_price=mysqli_fetch_array($result_products)){
-              $product_price=array($row_product_price['prod_price']);
-              $product_values=array_sum($product_price);
-              $total+=$product_values;
-        }
+      $total += $row['total_quan_price'];
     }
-  echo $total;
+  return $total;
+  }
+
+
+  //get user order details
+  function user_order_details(){
+    global $con;
+    $username=$_SESSION['username'];
+    $get_details="select * from `user_table` where username='$username'";
+    $result_query=mysqli_query($con,$get_details);
+    while($row_query=mysqli_fetch_array($result_query)){
+      $user_id=$row_query['user_id'];
+      if(!isset($_GET['edit_account'])){
+        if(!isset($_GET['my_orders'])){
+          if(!isset($_GET['delete_account'])){
+            $get_orders="select * from `user_orders` where user_id=$user_id 
+            and order_status='pending'";
+            $result_orders_query=mysqli_query($con,$get_orders);
+            $row_count=mysqli_num_rows($result_orders_query);
+            if($row_count>0){
+              echo "<h3   class='text-center mt-5' style='font-family:Orbitron;' >YOU HAVE $row_count PENDING ORDERS </h3>
+              <p class='text-center' style='font-family:Orbitron;'> <a href='profile.php?my_orders'>Order Details</a></p>";
+            }
+            else{
+              echo "<h3   class='text-center mt-5' style='font-family:Orbitron;' >YOU HAVE NO PENDING ORDERS </h3>
+              <p class='text-center' style='font-family:Orbitron;'> <a href='../index.php'>Explore products</a></p>";
+            }
+          }
+        }
+      }
+    }
   }
 ?>
