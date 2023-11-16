@@ -1,3 +1,10 @@
+<!-- connect file  -->
+<?php
+ include('../includes/connect.php');
+ include('../functions/common_function.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +59,7 @@
             </div>
             <div class="button text-center"style="background-color: #FFD449;">
               <button class="ad_button"><a href="insert_product.php" class="nav-link my-1 ">INSERT PRODUCTS</a></button>
-              <button class="ad_button"><a href="" class="nav-link my-1 ">VIEW PRODUCTS</a></button>
+              <button class="ad_button"><a href="index.php?view_products" class="nav-link my-1 ">VIEW PRODUCTS</a></button>
               <button class="ad_button"><a href="index.php?insert_category" class="nav-link my-1 ">INSERT CATEGORIES</a></button>
               <button class="ad_button"><a href="" class="nav-link my-1 ">VIEW CATEGORIES</a></button>
               <button class="ad_button"><a href="index.php?insert_brands" class="nav-link my-1">INSERT BRANDS</a></button>
@@ -76,6 +83,14 @@
             {
               include('insert_brands.php');
             }
+            if(isset($_GET['view_products']))
+            {
+              include('view_products.php');
+            }
+            if(isset($_GET['edit_products']))
+            {
+              include('edit_products.php');
+            }
           ?>
         </div>
 
@@ -89,9 +104,14 @@
             {
               include('insert_catcategory.php');
             }
+            
           ?>
     </div>
     </div>
+    <?php
+ include('../includes/footer.php');
+
+?>
     <!-- bootstrap js link -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" 
 integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
